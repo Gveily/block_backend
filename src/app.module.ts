@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppUpdate } from './app.update';
 import { AppService } from './app.service';
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
@@ -15,14 +14,14 @@ import { Product } from "./entities/Product";
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      database: 'block',
-      username: 'postgres',
-      password: '4br4k4d4br4',
+      url: process.env.DATABASE_URL,
+      host: process.env.PGHOST,
+      port: parseInt(process.env.PGPORT),
+      database: process.env.PGDATABASE,
+      username: process.env.PGUSER,
+      password: process.env.PGPASSWORD,
       entities: [City, Area, Product],
       logger: 'file',
-      synchronize: true, // never use TRUE in production!
     }),
     ConfigModule.forRoot({
       envFilePath: '.env'
