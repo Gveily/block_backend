@@ -22,6 +22,7 @@ import { Product } from "./entities/Product";
       password: process.env.PGPASSWORD,
       entities: [City, Area, Product],
       logger: 'file',
+      synchronize: true,
     }),
     ConfigModule.forRoot({
       envFilePath: '.env'
