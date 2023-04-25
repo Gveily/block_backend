@@ -5,11 +5,5 @@ export class CreateCityDto {
     type: String,
     description: 'Имя города'
   })
-  text: string;
-
-  @ApiProperty({
-    type: String,
-    description: 'Имя города с маленькой буквы'
-  })
-  callback_data: string;
+  name: string;
 }

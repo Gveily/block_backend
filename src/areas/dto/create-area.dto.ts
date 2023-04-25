@@ -15,11 +15,5 @@ export class CreateAreaDto {
     type: String,
     description: 'Имя Района'
   })
-  text: string;
-
-  @ApiProperty({
-    type: String,
-    description: 'Имя района с маленькой буквы'
-  })
-  callback_data: string;
+  name: string;
 }

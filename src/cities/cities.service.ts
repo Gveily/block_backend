@@ -16,7 +16,6 @@ export class CitiesService {
   }
 
   async create(createCityDto: CreateCityDto) {
-    console.log(createCityDto);
     return this.citiesRepository.save(
       this.citiesRepository.create(createCityDto)
     )

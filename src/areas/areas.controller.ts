@@ -1,17 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { AreasService } from './areas.service';
-import { CreateAreaDto } from './dto/create-area.dto';
 import { UpdateAreaDto } from './dto/update-area.dto';
-import { ApiTags } from "@nestjs/swagger";
+import { ApiQuery, ApiTags } from "@nestjs/swagger";
+import { AreaEnum } from "../products/dto/enums";
 
 @ApiTags('Районы')
 @Controller('areas')
 export class AreasController {
   constructor(private readonly areasService: AreasService) {}
 
+  @ApiQuery({ name: 'Район', enum: AreaEnum, required: true })
+  @ApiQuery({ name: 'Город', required: true })
   @Post()
-  create(@Body() createAreaDto: CreateAreaDto) {
-    return this.areasService.create(createAreaDto);
+  create(
+    @Query('Район') area: string,
+    @Query('Город') cityId: string,
+  ) {
+    return this.areasService.create({ cityId: parseInt(cityId), name: area});
   }
 
   @Get()

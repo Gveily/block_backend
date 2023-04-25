@@ -12,15 +12,9 @@ export class City {
 
   @Column({
     type: 'character varying',
-    name: 'text'
+    name: 'name'
   })
-  text: string
-
-  @Column({
-    type: 'character varying',
-    name: 'callback_data'
-  })
-  callback_data: string
+  name: string
 
   @OneToMany(() => Area, (area) => area.city)
   @JoinColumn({name: 'id', referencedColumnName: 'city_id'})

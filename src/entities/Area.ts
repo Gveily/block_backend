@@ -13,15 +13,9 @@ export class Area {
 
   @Column({
     type: 'character varying',
-    name: 'text'
+    name: 'name'
   })
-  text: string
-
-  @Column({
-    type: 'character varying',
-    name: 'callback_data'
-  })
-  callback_data: string
+  name: string
 
   @Column({
     type: 'integer',
