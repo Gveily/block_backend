@@ -28,6 +28,14 @@ export class AreasService {
     return `This action returns a #${id} area`;
   }
 
+  async findByCityId(cityId: number) {
+    return await this.areasRepository.find({
+      where: {
+        cityId
+      }
+    })
+}
+
   async update(id: number, updateAreaDto: UpdateAreaDto) {
     try {
       const area = await this.areasRepository.findOneOrFail({

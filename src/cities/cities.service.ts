@@ -35,7 +35,7 @@ export class CitiesService {
   }
 
   update(id: number, updateCityDto: UpdateCityDto) {
-    return `This action updates a #${ id } city`;
+    return this.citiesRepository.update(+id, updateCityDto);
   }
 
   async remove(id: number) {

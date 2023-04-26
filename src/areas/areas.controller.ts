@@ -24,6 +24,14 @@ export class AreasController {
     return this.areasService.findAll();
   }
 
+  @ApiQuery({name: 'cityId', required: true})
+  @Get('by-city')
+  getByCityId(
+    @Query('cityId') cityId: string
+  ) {
+    return this.areasService.findByCityId(parseInt(cityId))
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.areasService.findOne(+id);
