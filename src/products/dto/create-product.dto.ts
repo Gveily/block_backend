@@ -8,13 +8,7 @@ export class CreateProductDto {
     type: String,
     description: 'Имя товара'
   })
-  text: string;
-
-  @ApiProperty({
-    type: String,
-    description: 'Имя товара с маленькой буквы'
-  })
-  callback_data: string;
+  name: string;
 
   @ApiProperty({
     type: String,

@@ -23,6 +23,14 @@ export class ProductsService {
     return `This action returns all products`;
   }
 
+  async findByAreaId(areaId: number) {
+    return await this.productsRepository.find({
+      where: {
+        areaId
+      }
+    })
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} product`;
   }

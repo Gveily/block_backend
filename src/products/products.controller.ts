@@ -24,12 +24,20 @@ export class ProductsController {
     @Query('Цена') price: string,
     @Query('Фотографии') photoUrl: string
   ) {
-    return this.productsService.create({ photoUrl, price, weight, areaId: AreaEnum[area] + 1, text: product, callback_data: product.toLowerCase() });
+    return this.productsService.create({ photoUrl, price, weight, areaId: AreaEnum[area] + 1, name: product });
   }
 
   @Get()
   findAll() {
     return this.productsService.findAll();
+  }
+
+  @ApiQuery({ name: 'areaId', required: true })
+  @Get('by-area-id')
+  findByAreaId(
+    @Query('areaId') areaId: string
+  ) {
+    return this.productsService.findByAreaId(parseInt(areaId));
   }
 
   @Get(':id')
