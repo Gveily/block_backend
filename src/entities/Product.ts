@@ -8,7 +8,7 @@ export class Product {
     type: 'integer',
     name: 'id'
   })
-  id: string;
+  id: number;
 
   @Column({
     type: 'character varying',

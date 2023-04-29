@@ -13,6 +13,7 @@ export class ProductsService {
     private productsRepository: Repository<Product>
   ) {
   }
+
   create(createProductDto: CreateProductDto) {
     return this.productsRepository.save(
       this.productsRepository.create(createProductDto)
@@ -31,12 +32,12 @@ export class ProductsService {
     })
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number) {
+    return await this.productsRepository.findOneBy({ id })
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+    return `This action updates a #${ id } product`;
   }
 
   async remove(id: number) {

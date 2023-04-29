@@ -9,6 +9,8 @@ import { CitiesModule } from './cities/cities.module';
 import { AreasModule } from './areas/areas.module';
 import { ProductsModule } from './products/products.module';
 import { Product } from "./entities/Product";
+import { OrdersModule } from './orders/orders.module';
+import { Order } from "./entities/Order";
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import { Product } from "./entities/Product";
       database: process.env.PGDATABASE,
       username: process.env.PGUSER,
       password: process.env.PGPASSWORD,
-      entities: [City, Area, Product],
+      entities: [City, Area, Product, Order],
       logger: 'file',
       synchronize: true,
     }),
@@ -32,7 +34,8 @@ import { Product } from "./entities/Product";
     // }),
     CitiesModule,
     AreasModule,
-    ProductsModule
+    ProductsModule,
+    OrdersModule
   ],
   controllers: [AppController],
   providers: [AppService],
