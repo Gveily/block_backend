@@ -11,6 +11,8 @@ import { ProductsModule } from './products/products.module';
 import { Product } from "./entities/Product";
 import { OrdersModule } from './orders/orders.module';
 import { Order } from "./entities/Order";
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -35,7 +37,9 @@ import { Order } from "./entities/Order";
     CitiesModule,
     AreasModule,
     ProductsModule,
-    OrdersModule
+    OrdersModule,
+    AuthModule,
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],

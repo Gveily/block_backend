@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Product } from "../entities/Product";
@@ -20,24 +19,23 @@ export class ProductsService {
     )
   }
 
-  findAll() {
-    return `This action returns all products`;
-  }
-
   async findByAreaId(areaId: number) {
     return await this.productsRepository.find({
       where: {
         areaId
+      },
+      select: {
+        name: null,
+        areaId: null,
+        id: null,
+        weight: null,
+        price: null,
       }
     })
   }
 
   async findOne(id: number) {
     return await this.productsRepository.findOneBy({ id })
-  }
-
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${ id } product`;
   }
 
   async remove(id: number) {

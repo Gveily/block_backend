@@ -27,11 +27,6 @@ export class ProductsController {
     return this.productsService.create({ photoUrl, price, weight, areaId: AreaEnum[area] + 1, name: product });
   }
 
-  @Get()
-  findAll() {
-    return this.productsService.findAll();
-  }
-
   @ApiQuery({ name: 'areaId', required: true })
   @Get('by-area-id')
   findByAreaId(
@@ -43,11 +38,6 @@ export class ProductsController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.productsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(+id, updateProductDto);
   }
 
   @Delete(':id')
