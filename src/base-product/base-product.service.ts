@@ -24,8 +24,10 @@ export class BaseProductService {
     return await this.baseProductRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} baseProduct`;
+  async findOne(id: number) {
+    return await this.baseProductRepository.findOneBy({
+      id
+    })
   }
 
   update(id: number, updateBaseProductDto: UpdateBaseProductDto) {

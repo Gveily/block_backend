@@ -1,7 +1,4 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEnum } from "class-validator";
-import { AreaEnum } from "../../enums";
-import { Area } from "../../entities/Area";
 
 export class CreateProductDto {
   @ApiProperty({
@@ -12,7 +9,7 @@ export class CreateProductDto {
 
   @ApiProperty({
     type: String,
-    description: 'Цена в ETH'
+    description: 'Цена в ZL'
   })
   price: string;
 
@@ -33,4 +30,10 @@ export class CreateProductDto {
     description: 'Вес'
   })
   weight: string;
+
+  @ApiProperty({
+    type: Number,
+    description: 'base product id'
+  })
+  baseProductId: number;
 }
