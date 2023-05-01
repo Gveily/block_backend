@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestj
 import { AreasService } from './areas.service';
 import { UpdateAreaDto } from './dto/update-area.dto';
 import { ApiQuery, ApiTags } from "@nestjs/swagger";
-import { AreaEnum } from "../products/dto/enums";
+import { AreaEnum } from "../enums";
 
 @ApiTags('Районы')
 @Controller('areas')

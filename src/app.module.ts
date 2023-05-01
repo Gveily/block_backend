@@ -13,6 +13,8 @@ import { OrdersModule } from './orders/orders.module';
 import { Order } from "./entities/Order";
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { BaseProductModule } from './base-product/base-product.module';
+import { BaseProduct } from "./entities/BaseProduct";
 
 @Module({
   imports: [
@@ -24,7 +26,7 @@ import { UsersModule } from './users/users.module';
       database: process.env.PGDATABASE,
       username: process.env.PGUSER,
       password: process.env.PGPASSWORD,
-      entities: [City, Area, Product, Order],
+      entities: [City, Area, Product, Order, BaseProduct],
       logger: 'file',
       synchronize: true,
     }),
@@ -39,7 +41,8 @@ import { UsersModule } from './users/users.module';
     ProductsModule,
     OrdersModule,
     AuthModule,
-    UsersModule
+    UsersModule,
+    BaseProductModule
   ],
   controllers: [AppController],
   providers: [AppService],

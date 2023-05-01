@@ -3,6 +3,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Product } from "../entities/Product";
+import lodash from 'lodash';
 
 @Injectable()
 export class ProductsService {
@@ -20,7 +21,7 @@ export class ProductsService {
   }
 
   async findByAreaId(areaId: number) {
-    return await this.productsRepository.find({
+    const productsByAreaId = await this.productsRepository.find({
       where: {
         areaId
       },
@@ -30,8 +31,10 @@ export class ProductsService {
         id: null,
         weight: null,
         price: null,
-      }
-    })
+      },
+    });
+
+    return productsByAreaId;
   }
 
   async findOne(id: number) {

@@ -1,5 +1,6 @@
-import { Column, Entity, Index, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, JoinColumn, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Area } from "./Area";
+import { BaseProduct } from "./BaseProduct";
 
 @Index('product_pkey', ['id'], { unique: true })
 @Entity('product', { schema: 'public' })
@@ -40,7 +41,18 @@ export class Product {
   })
   areaId: number;
 
+  @Column({
+    type: 'integer',
+    name: 'base_product_id',
+    nullable: true
+  })
+  baseProductId: number;
+
+  @ManyToOne(() => BaseProduct, (baseProduct) => baseProduct.id)
+  @JoinColumn({ name: 'base_product_id', referencedColumnName: 'id' })
+  baseProduct: BaseProduct;
+
   @ManyToOne(() => Area, (area) => area.id)
-  @JoinColumn({name: 'area_id', referencedColumnName: 'id'})
+  @JoinColumn({ name: 'area_id', referencedColumnName: 'id' })
   area: Area;
 }

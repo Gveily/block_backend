@@ -3,7 +3,7 @@ import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ApiBody, ApiQuery, ApiTags } from "@nestjs/swagger";
-import { AreaEnum, ProductsEnum } from "./dto/enums";
+import { AreaEnum, ProductsEnum } from "../enums";
 
 @ApiTags('Товары')
 @Controller('products')

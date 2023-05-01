@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEnum } from "class-validator";
-import { AreaEnum } from "./enums";
+import { AreaEnum } from "../../enums";
 import { Area } from "../../entities/Area";
 
 export class CreateProductDto {
