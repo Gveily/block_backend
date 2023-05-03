@@ -46,15 +46,13 @@ export class ProductsService {
 
     multidimensionalGroupedArray.pop();
 
-    // return multidimensionalGroupedArray.map(el => {
-    //   const res = {
-    //     ...el[0],
-    //     amount: el.length
-    //   }
-    //   return res;
-    // })
-
-    return multidimensionalGroupedArray;
+    return multidimensionalGroupedArray.map(el => {
+      const res = {
+        ...el[0],
+        amount: el.length
+      }
+      return res;
+    });
   }
 
   async findByAreaId(areaId: number) {
