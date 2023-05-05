@@ -6,6 +6,7 @@ import { BaseProductService } from "../base-product/base-product.service";
 import { AreasService } from "../areas/areas.service";
 import { Product } from "../entities/Product";
 import { CreateProductDto } from "./dto/create-product.dto";
+import { MakePendingPaymentDto } from "./dto/make-pending-payment.dto";
 
 @ApiTags('Товары')
 @Controller('products')
@@ -23,6 +24,13 @@ export class ProductsController {
     const product = await this.baseProductService.findOne(+createProductDto.baseProductId);
 
     return this.productsService.create({ ...createProductDto, baseProductId: product.id, name: product.name });
+  }
+
+  @Post('/make-pending-payment')
+  async makePendingPayment(
+    @Body() makePendingPaymentDto: Array<MakePendingPaymentDto>
+  ) {
+    return this.productsService.makePendingPayment(makePendingPaymentDto)
   }
 
   @ApiQuery({ name: 'areaId', required: true })

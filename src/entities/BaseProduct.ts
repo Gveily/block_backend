@@ -27,6 +27,7 @@ export class BaseProduct {
     type: 'character varying',
     name: 'product_photo',
     nullable: true,
+    default: 'https://i.ibb.co/q1XZZd0/no-photo.png'
   })
   productPhoto: string;
 

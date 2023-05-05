@@ -42,6 +42,13 @@ export class Product {
   })
   baseProductId: number;
 
+  @Column({
+    type: 'boolean',
+    name: 'pending_payment',
+    default: false
+  })
+  pendingPayment: boolean;
+
   @ManyToOne(() => BaseProduct, (baseProduct) => baseProduct.id)
   @JoinColumn({ name: 'base_product_id', referencedColumnName: 'id' })
   baseProduct: BaseProduct;

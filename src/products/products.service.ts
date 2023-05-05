@@ -3,6 +3,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Product } from "../entities/Product";
+import { MakePendingPaymentDto } from "./dto/make-pending-payment.dto";
 
 @Injectable()
 export class ProductsService {
@@ -19,6 +20,45 @@ export class ProductsService {
     )
   }
 
+  async makePendingPayment(dto: Array<MakePendingPaymentDto>) {
+    let result = [];
+
+    for (const el of dto) {
+      const items = await this.productsRepository
+        .createQueryBuilder('product')
+        .where('product.area_id = :areaId', { areaId: el.areaId })
+        .andWhere('product.base_product_id = :baseProductId', { baseProductId: el.baseProductId })
+        .leftJoinAndSelect('product.baseProduct', 'baseProduct')
+        .take(el.amountToBuy)
+        .getMany()
+      result.push(items)
+    }
+
+    result = result.flat(1);
+
+    for (const el of result) {
+      await this.productsRepository.update({ id: el.id }, { ...el, pendingPayment: true });
+    }
+    const TEN_MINUTES_IN_MS = 600000;
+
+    setTimeout(async () => {
+      for (const el of result) {
+        const item = await this.productsRepository.findBy({
+          id: el.id
+        })
+
+        if (item) {
+          await this.productsRepository.update({ id: el.id }, { ...el, pendingPayment: false })
+        }
+      }
+    }, TEN_MINUTES_IN_MS);
+
+    return (result as Array<Product>).map((el) => {
+      const { photoUrl, pendingPayment, ...rest } = el
+      return rest;
+    })
+  }
+
   getProductsWithCounter(products) {
     const mapper = {};
     const multidimensionalGroupedArray = [[]];
@@ -33,7 +73,7 @@ export class ProductsService {
       }
     });
 
-    for(let prop in mapper) {
+    for (let prop in mapper) {
       const el = products.find((product) => product.baseProductId + product.weight === prop);
 
       for (let i = 0; i < parseInt(mapper[prop]); i++) {
@@ -57,7 +97,8 @@ export class ProductsService {
   async findByAreaId(areaId: number) {
     const productsByAreaId = await this.productsRepository.find({
       where: {
-        areaId
+        areaId,
+        pendingPayment: false
       },
       select: {
         areaId: null,
