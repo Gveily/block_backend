@@ -24,8 +24,10 @@ export class AreasService {
     return await this.areasRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} area`;
+  async findOne(id: number) {
+    return await this.areasRepository.findOneBy({
+      id
+    })
   }
 
   async findByCityId(cityId: number) {
