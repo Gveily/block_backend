@@ -39,7 +39,7 @@ export class ProductsService {
     for (const el of result) {
       await this.productsRepository.update({ id: el.id }, { ...el, pendingPayment: true });
     }
-    const TEN_MINUTES_IN_MS = 600000;
+    const TEN_MINUTES_IN_MS = 300000;
 
     setTimeout(async () => {
       for (const el of result) {
