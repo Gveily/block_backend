@@ -40,7 +40,7 @@ export class ProductsService {
     for (const el of result) {
       await this.productsRepository.update({ id: el.id }, { ...el, pendingPayment: true });
     }
-    const TEN_MINUTES_IN_MS = 300000;
+    const FIVE_MINUTES_IN_MS = 300000;
 
     setTimeout(async () => {
       for (const el of result) {
@@ -52,7 +52,7 @@ export class ProductsService {
           await this.productsRepository.update({ id: el.id }, { ...el, pendingPayment: false })
         }
       }
-    }, TEN_MINUTES_IN_MS);
+    }, FIVE_MINUTES_IN_MS);
 
     return (result as Array<Product>).map((el) => {
       const { photoUrl, pendingPayment, ...rest } = el
