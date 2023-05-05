@@ -28,6 +28,7 @@ export class ProductsService {
         .createQueryBuilder('product')
         .where('product.area_id = :areaId', { areaId: el.areaId })
         .andWhere('product.base_product_id = :baseProductId', { baseProductId: el.baseProductId })
+        .andWhere('product.pending_payment = :pendingPayment', {pendingPayment: false})
         .leftJoinAndSelect('product.baseProduct', 'baseProduct')
         .take(el.amountToBuy)
         .getMany()
