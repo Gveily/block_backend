@@ -13,12 +13,6 @@ export class Product {
 
   @Column({
     type: 'character varying',
-    name: 'name'
-  })
-  name: string;
-
-  @Column({
-    type: 'character varying',
     name: 'photo_url',
   })
   photoUrl: string;
